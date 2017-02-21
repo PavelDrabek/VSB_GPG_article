@@ -1,0 +1,37 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\begin{document}
+\centerline{\LARGE Geometrie pro počítačovou grafiku}
+\vspace{\baselineskip}
+\centerline{ Pavel Drábek, DRA0042}
+
+\section*{Průsečík přímky s koulí}
+Parametrické vyjádření přímky 
+\begin{align*}
+  x(t) &= A_x + u_x * t\\
+  y(t) &= A_y + u_y * t\\
+  z(t) &= A_z + u_z * t
+\end{align*}
+Parametrické vyjádření koule 
+\begin{align*}
+  (x-s_x)^2 + (y-s_y)^2 + (z-s_z)^2 &= r^2
+\end{align*}
+Dosadíme rovnici přímky do rovnici koule 
+\begin{align*}
+  (A_x + u_x * t-s_x)^2 + (A_y + u_y * t-s_y)^2 + (A_z + u_z * t-s_z)^2 = r^2
+\end{align*}
+Vyjádříme parametr $t$ pomocí kvadratické rovnice
+\begin{align*}  
+  at^2 + bt + c &= 0\\
+  t_{1,2} &= \frac{-b\pm\sqrt{D}}{2ac}\\
+  D &= b^2-4ac
+\end{align*}
+\begin{align*}  
+  a &= t^2(u_x^2 + u_y^2 + u_z^2)\\
+  b &= 2t(u_x(A_x-s_x) + u_y(A_y-s_y) + u_z(A_z-s_z))\\
+  c &= (A_x - s_x)^2 + (A_y - s_y)^2 + (A_z - s_z)^2 - r^2\\  
+\end{align*}
+Pokud $D >= 0$ přímka protína kouli. Parametr $t$ dosadíme do parametrické vyjádření přímky a získáme průsečík, kde přímka protíná kouli. Pokud budeme uvažovat nad vektorem $u$ jako normalizovaným směrovým vektorem přímky a budeme chtít nalézt průsečík pouze ve směru $u$ od bodu $A$, parametr $t \in <0,\infty>$. 
+\end{document}
