@@ -18,7 +18,7 @@ Cílem této kapitoly je nahradit metodu rtcIntersect z knihovny Embree pro výp
 \subsection{Parametrické vyjádření přímky} 
 Parametrické  vyjádření přímky je dáno bodem $A$, vektorem $\vec{u}$, parametrem $t$ a předpisem: 
 \begin{equation} \label{eq:primka}
-  X(t) = A + \vec{u} * t
+  X(t) = A + \vec{u} * t  \qquad t \in \langle0;1\rangle
 \end{equation}
 Kdy dosazením parametru $t$ do rovnice získáme bod $X$, který je od bodu $A$ vzdálený $t |\vec{u}|$ ve směru vektoru $\vec{u}$.
 
@@ -45,7 +45,7 @@ Abychom získali hodnoty parametru $t$, převedeme rovnici do tvaru kvadratické
   t_{1,2} &= \frac{-b\pm\sqrt{D}}{2ac} \\
   D &= b^2-4ac
 \end{align}
-Získané kvoeficienty $a$, $b$, $c$ z upravené rovnice \eqref{eq:primkakulovaplocha} můžeme dosadit do kvadratické rovnice pro získání parametru $t$.  
+Získané koeficienty $a$, $b$, $c$ z upravené rovnice \eqref{eq:primkakulovaplocha} můžeme dosadit do kvadratické rovnice pro získání parametru $t$.  
 \begin{align*}  
   a &= (u_x^2 + u_y^2 + u_z^2)\\
   b &= 2(u_x(A_x-s_x) + u_y(A_y-s_y) + u_z(A_z-s_z))\\
@@ -57,10 +57,33 @@ Spočítaný diskriminant $D$ z rovnice \eqref{eq:primkakulovaplocha} může nab
 \item $D = 0$: přímka je tečna (existuje právě jeden průsečík)
 \item $D > 0$: přímka je sečna (existují 2 průsečíky)
 \end{enumerate}
-Nyní můžeme spočítat parametr $t$. Pokud chceme spočítat průsečík ve směru přímky, musí být parametr $t>=0$. V opačném případě přímka v daném směru kulovou plochu neprotíná.
+Nyní můžeme spočítat parametr $t$. Pokud chceme spočítat průsečík ve směru přímky, musí být parametr $t\ge0$. V opačném případě přímka v daném směru kulovou plochu neprotíná.
 Pokud vyjdou 2 parametry $t_1$, $t_2$ a chceme bod, který protne přímka v daném směru první, pak platí: 
 \begin{equation*}
-t = MIN(t_1, t_2)
+t = MIN(t_1, t_2) \qquad t_1,t_2 \ge 0
 \end{equation*}
 Kde funkce $MIN$ vrací menší hodnotu ze zadaných parametrů. 
+
+\section{Barycentrické souřadnice}
+Barycentrické souřadnice jsou váhové koeficienty vyjadřující blízkost vnitřního bodu $X$ trojúhelníku $ABC$ k jeho jednotlivých vrcholům $A$, $B$, $C$.
+\subsection{Parametrické vyjádření}
+Barycentrické souřadnice definujeme předpisem: 
+\begin{equation*}
+X = \alpha A + \beta B + \gamma C
+\end{equation*}
+\begin{equation*}
+\alpha + \beta + \gamma = 1  \qquad  \alpha, \beta, \gamma \in \langle0;1\rangle 
+\end{equation*}
+\subsection{Odvození souřadnic}
+Pokud známe všechny body trojúhelníku, můžeme odvodit koeficienty $\alpha$, $\beta$, $\gamma$. Nejprve upravíme jednu rovnici tak, abychom ji mohli odečíst od druhé: 
+\begin{align*}
+X_x = \alpha A_x + \beta B_x + (1 - \alpha - \beta) C_x \\
+X_y = \alpha A_y + \beta B_y + (1 - \alpha - \beta) C_y 
+\end{align*}
+Následně rešíme soustavou dvou rovnic o dvou neznámých: 
+\begin{align*}
+\alpha &= \frac{(B_y-C_y)(X_x-C_x) + (C_x-B_x)(X_y-C_y) }{(B_y-C_y)(A_x-C_x) + (C_x-B_x)(A_y-C_y)}\\
+\beta &= \frac{(C_y-A_y)(X_x-C_x) + (A_x-C_x)(X_y-C_y) }{(B_y-C_y)(A_x-C_x) + (C_x-B_x)(A_y-C_y)}\\
+\gamma &= 1 - \alpha - \beta
+\end{align*}
 \end{document}
