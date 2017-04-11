@@ -1,0 +1,22 @@
+\section{Barycentrické souřadnice}
+Barycentrické souřadnice jsou váhové koeficienty vyjadřující blízkost bodu $X$ trojúhelníku $ABC$ k jeho jednotlivých vrcholům $A$, $B$, $C$.
+\subsection{Analytické vyjádření}
+Barycentrické souřadnice definujeme předpisem: 
+\begin{equation*}
+X = \alpha A + \beta B + \gamma C,
+\end{equation*}
+\begin{equation*}
+\alpha + \beta + \gamma = 1,  \qquad  \alpha, \beta, \gamma \in \langle0;1\rangle. 
+\end{equation*}
+\subsection{Odvození souřadnic}
+Pokud známe body $A$, $B$, $C$ trojúhelníku, můžeme odvodit koeficienty $\alpha$, $\beta$, $\gamma$. Nejprve upravíme jednu rovnici tak, abychom ji mohli odečíst od druhé: 
+\begin{align*}
+X_x = \alpha A_x + \beta B_x + (1 - \alpha - \beta) C_x, \\
+X_y = \alpha A_y + \beta B_y + (1 - \alpha - \beta) C_y.
+\end{align*}
+Následně rešíme soustavou dvou rovnic o dvou neznámých: 
+\begin{align*}
+\alpha &= \frac{(B_y-C_y)(X_x-C_x) + (C_x-B_x)(X_y-C_y) }{(B_y-C_y)(A_x-C_x) + (C_x-B_x)(A_y-C_y)},\\
+\beta &= \frac{(C_y-A_y)(X_x-C_x) + (A_x-C_x)(X_y-C_y) }{(B_y-C_y)(A_x-C_x) + (C_x-B_x)(A_y-C_y)},\\
+\gamma &= 1 - \alpha - \beta.
+\end{align*}

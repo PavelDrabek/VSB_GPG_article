@@ -1,0 +1,50 @@
+\section{Aproximace přímky metodou nejmenších čtverců}
+Metoda nejmenších čtverců je aproximační metoda, která prokládá n-ticí bodů přímku tak, aby celková odchylka bodů od přímky byla co nejmenší. Metoda předpokládá, že pro dané body platí lineární vztah. 
+
+\subsection{Metoda nejmenších čtverců} 
+Předpokládejme, že mezi veličinami $x$ a $y$ je lineární vztah ve tvaru  
+\begin{equation} \label{eq:funkce_primky}
+	f: y = ax + b.
+\end{equation}
+Tato rovnice nám vyjadřuje funkci přímky f(x). 
+Metoda se snaží vystihnout chování bodů pomocí lineární závislosti. Přímka nebude procházet všemi body. Chceme tedy, aby procházela co nejblíže okolo nich. Za optimální přímku považujeme tu, která minimalizuje součet ploch čtverců (kvadrátů). Tento součet reprezentujeme funkcí $c(a, b)$, kde $a$, $b$ jsou koeficienty aproximované přímky a $n$ je počet zadaných bodů: 
+\begin{equation} \label{eq:funkce_kvadrantu}
+	c(a,b) = \sum_{i=0}^{n}(f(x) - y_i)^2. 
+\end{equation}
+Minimální hodnotu funkce $c(a,b)$ získáme parciální derivací jejími argumenty: 
+\begin{equation} \label{eq:parcialni_derivace}
+	\frac{\partial c(a,b)}{\partial a} = 0, \qquad \frac{\partial c(a,b)}{\partial b} = 0.
+\end{equation}
+Parciální derivací \eqref{eq:parcialni_derivace} získáme soustavu dvou rovnic o dvou neznámých. Dosazením výsledných koeficientů do explicitní rovnice přímky \eqref{eq:funkce_primky} získáme aproximovanou přímku mezi danými body. 
+
+\subsection{Příklad}
+Najděte funkcí aproximační přímky bodů $A[0,1]$, $B[2,3]$, $C[3,3]$, $D[4,5]$ pomocí metody nejmenších čtverců. 
+\subsubsection{Výpočet}
+Složky jednotlivých bodů dosadíme do rovnice \eqref{eq:funkce_kvadrantu} pro výpočet funkce $c(a,b)$:
+\begin{equation*}
+	c(a,b) = (a+b)^2 + (2a+b-3)^2 + (3a+b-3)^2 + (4a+b-5)^2,
+\end{equation*}
+abychom mohli koeficienty $a$, $b$ vyjádřit explicitně rovnici přímky \eqref{eq:funkce_primky}. Nyní podle rovnice \eqref{eq:parcialni_derivace} provedeme parciální derivaci: 
+\begin{align*}
+	\frac{\partial c(a,b)}{\partial a} &= 2(a+b) + 2(2a+b-3)2 + 2(3a+b-3)3 + 2(4a+b-5)4 = \\
+	 &= 60a + 20b - 70 \\
+	\frac{\partial c(a,b)}{\partial b} &= 2(a+b) + 2(2a+b-3) + 2(3a+b-3) + 2(4a+b-5) = \\
+	 &= 20a + 8b - 22.
+\end{align*}
+Následně řešíme soustavu dvou rovnic o dvou neznámých a hledáme koeficienty aproximované přímky: 
+\begin{align*}
+	60a + 20b &= 70 \\
+	20a + 8b &= 22 \\
+	a &= \frac{3}{2} \\
+	b &= -1. 
+\end{align*}
+Dosazením koeficientů do funkce přímky \eqref{eq:funkce_primky} získáme rovnici aproximované přímky: 
+\begin{equation*}
+	f(y) = \frac{3}{2}x - 1
+\end{equation*}
+Derivace této přímky je $f'(x) = \frac{3}{2}$. Jedná se o směrnici přímky, která se využívá k určení úhlu mezi přímkou a osou $x$. 
+\begin{figure}[h]
+	\includegraphics[width=8cm]{nejmensi_ctverce.png}
+	\centering
+	\caption{Vizualizace aproximované přímky pomocí metody nejmenších čtverců}
+\end{figure}
